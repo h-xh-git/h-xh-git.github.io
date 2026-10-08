@@ -1,6 +1,8 @@
 /* ============================================================
    player.js — 全站音乐播放器
    歌单来自 assets/music/playlist.js（数组顺序 = 列表顺序）。
+   每条可以只写文件名（走 assets/music/），也可以直接写完整地址 ——
+   想把歌放对象存储 / CDN / Releases 上，就在歌单里硬编码地址。
    纯前端、零依赖；音频走 <audio> 元素而不是 fetch，
    所以在 file://（双击 index.html）下也能正常播放。
 
@@ -34,6 +36,16 @@
     var src = (node && node.getAttribute("src")) || "assets/js/player.js";
     return src.replace(/assets\/js\/player\.js.*$/, "") + "assets/music/";
   })();
+
+  /* 歌单里每一条的解析规则：
+     · 只写文件名（xxx.mp3）→ 拼成 assets/music/xxx.mp3
+     · 完整地址（http(s)://、//）或带斜杠的路径（/xx、assets/xx）→ 原样用
+     所以换托管时不用改逻辑，直接在 playlist.js 里硬编码地址就行 */
+  function trackSrc(name) {
+    var s = String(name || "");
+    if (/^[a-z][a-z0-9+.-]*:/i.test(s) || s.indexOf("//") === 0 || s.indexOf("/") >= 0) return s;
+    return MUSIC_DIR + encodeURIComponent(s);
+  }
 
   var audio = new Audio();
   audio.preload = "metadata";
@@ -164,7 +176,10 @@
   }
 
   function nameOf(i) {
-    return names[i].replace(/\.[^.\\/]+$/, "");
+    /* 从「文件名」或「完整地址」里取出显示用的名字（去掉路径、查询串和扩展名） */
+    var raw = String(names[i] || "");
+    var base = raw.split("#")[0].split("?")[0].split("/").pop() || raw;
+    return base.replace(/\.[^.\\/]+$/, "");
   }
 
   function paintPct(pct) {
@@ -322,7 +337,7 @@
       btn.type = "button";
       btn.setAttribute("data-track", String(i));
       btn.innerHTML = '<span class="n">' + pad(i + 1) + '</span><span class="t"></span>';
-      btn.querySelector(".t").textContent = names[i].replace(/\.[^.\\/]+$/, "");
+      btn.querySelector(".t").textContent = nameOf(i);
       li.appendChild(btn);
       frag.appendChild(li);
     });
@@ -405,7 +420,7 @@
   function load(i, autoplay) {
     current = ((i % names.length) + names.length) % names.length;
 
-    audio.src = MUSIC_DIR + encodeURIComponent(names[current]);
+    audio.src = trackSrc(names[current]);
 
     setText(els.title, nameOf(current));
     setText(els.index, pad(current + 1) + " / " + pad(names.length));
@@ -425,7 +440,7 @@
     failStreak += 1;
     if (failStreak >= names.length) {
       setText(els.title, "这些歌都打不开");
-      setText(els.index, "检查 assets/music 里的文件名与 playlist.js 是否一致");
+      setText(els.index, "检查 playlist.js 里的文件名或地址是否可用");
       playingClass(false);
       failStreak = 0;
       return;
@@ -437,7 +452,7 @@
   if (!names.length) {
     if (card) {
       setText(card.querySelector(".music-title"), "还没放音乐");
-      setText(card.querySelector(".music-index"), "把 mp3 放进 assets/music 并写进 playlist.js");
+      setText(card.querySelector(".music-index"), "把音频地址写进 playlist.js");
       Array.prototype.forEach.call(
         card.querySelectorAll("button, input"),
         function (b) { b.disabled = true; }
