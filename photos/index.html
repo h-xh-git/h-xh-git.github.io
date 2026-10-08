@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="fresh">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f6f2" />
+  <meta name="description" content="相册 —— 走走，停停。留住一些喜欢的片刻。" />
+  <title>相册 · 夜坐所安的小屋</title>
+
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/page.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到页面内容</a>
+
+<div class="site-shell page-shell">
+
+  <!-- ================= 站头 ================= -->
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="夜坐所安的小屋 首页">
+      <span>夜坐所安的小屋</span>
+    </a>
+
+    <nav aria-label="主导航">
+      <a href="../index.html">首页</a>
+      <a href="../projects/index.html">项目</a>
+      <a href="../essays/index.html">随笔</a>
+      <a href="index.html" class="active" aria-current="page">相册</a>
+      <a href="../collections/index.html">收集</a>
+      <a href="../friends/index.html">友链</a>
+    </nav>
+
+    <div class="header-contact">
+      <span>
+        <i></i>
+        <span class="header-location-name" title="广州, CN">广州, CN</span>
+      </span>
+      <a class="button dark" href="mailto:huang_xiang_hua@163.com">
+        聊聊
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17 17 7M9 7h8v8" />
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= 主区 ================= |
+       data-base："../" 用来把数据文件里写死的站内路径（照片）补成当前这一层能用的相对路径 -->
+  <main id="main" tabindex="-1" class="page-main" data-album data-base="../">
+
+    <div class="page-head">
+      <div>
+        <span class="eyebrow">03 / Photos</span>
+        <h1>相册</h1>
+        <p>走走，停停。留住一些喜欢的片刻。</p>
+      </div>
+      <span class="page-number" aria-hidden="true">03</span>
+    </div>
+
+    <div class="page-summary">
+      <span class="count" data-album-count></span>
+    </div>
+
+    <!-- 分类标签页由 assets/js/album-page.js 填（只有一个分类时整排不出现） -->
+    <div class="album-filter" data-album-filter role="group" aria-label="按分类筛照片" hidden></div>
+
+    <!-- 照片墙由 assets/js/album-page.js 排布 -->
+    <div class="album-grid" data-album-grid></div>
+
+    <!-- 没照片时露出来的占位（有照片时由 JS 藏起来） -->
+    <p class="album-empty" data-album-empty>
+      还没放照片 —— 照片按分类放进 <b>assets/img/album/</b> 下的四个文件夹
+      （花枝入梦来 / 悠悠行旅中 / 飞鸟倦归林 / 漫漫人物录），
+      再到 <b>assets/data/album.js</b> 里加一条，这里就会自己长出一面照片墙。
+    </p>
+
+  </main>
+
+  <!-- ================= 页脚 ================= -->
+  <footer class="site-footer">
+    <span>© 2026 夜坐所安的小屋</span>
+    <div>
+      <a class="footer-contact" href="mailto:huang_xiang_hua@163.com" title="发邮件给我">huang_xiang_hua@163.com</a>
+      <a class="footer-contact" href="https://github.com/h-xh-git" target="_blank" rel="noopener" aria-label="GitHub：h-xh-git" title="github.com/h-xh-git">GitHub · h-xh-git</a>
+      <button type="button" data-pending="素材说明">素材说明</button>
+      <span class="footer-motto">把好奇心变成作品。</span>
+      <span class="footer-star">✳</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../assets/data/album.js"></script>
+<script src="../assets/js/album-page.js"></script>
+<script src="../assets/music/playlist.js"></script>
+<script src="../assets/js/player.js"></script>
+<script src="../assets/js/nav.js"></script>
+</body>
+</html>

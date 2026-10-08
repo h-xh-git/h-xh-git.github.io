@@ -1,0 +1,407 @@
+/* ============================================================
+   layout.css — 外壳与首页九宫格布局
+   结构：.site-shell（100svh 一列三段）> 站头 / main#main / 页脚
+   命中比例与断点取自模板 client/src/styles.css 实测值。
+   ============================================================ */
+
+/* ---------- 0. 基础重置 ---------- */
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-synthesis: none;
+}
+
+h1, h2, h3, p { margin: 0; }
+
+button, input, textarea, select { font: inherit; }
+
+button {
+  border: 0;
+  background: none;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, a, input { transition: background var(--ease), color var(--ease), opacity var(--ease); }
+
+button:hover:not(:disabled) { filter: brightness(0.97); }
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--theme-focus);
+  outline-offset: 4px;
+}
+
+button, a, input { touch-action: manipulation; }
+
+/* 键盘用户的跳转入口 */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 8px;
+  z-index: 200;
+}
+.skip-link:focus {
+  left: 16px;
+  padding: 10px 16px;
+  border-radius: 6px;
+  background: var(--lime);
+  color: var(--theme-on-accent);
+  font-size: 13px;
+}
+
+/* ---------- 1. 外壳 ---------- */
+.site-shell {
+  width: 100%;
+  height: 100svh;          /* 一屏：页面本身不滚动 */
+  min-height: 740px;
+  max-width: var(--shell-max);
+  margin: auto;
+  padding: 0 var(--shell-pad);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 桌面端：高度交给内容撑满，取消 min-height，避免矮窗口溢出 */
+@media (min-width: 1101px) {
+  .site-shell { min-height: 0; }
+}
+
+/* ---------- 2. 站头 ---------- */
+.site-header {
+  height: var(--header-h);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand { display: flex; align-items: center; min-width: 0; }
+
+/* 中文站名 7 个全角字：全角字形视觉体积大于等号拉丁字母，
+   所以比他 43px 的拉丁品牌名收到 30px，字距也从 -1.8px 放宽到 -0.5px。 */
+.brand > span {
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1;
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brand i { color: var(--theme-accent-ink); font-style: normal; }
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 39px;
+  margin-left: 80px;
+}
+
+.site-header nav a {
+  position: relative;
+  font-size: 15px;
+  padding: 13px 0 16px;
+}
+
+.site-header nav a:hover { color: var(--theme-focus); }
+
+.site-header nav a.active { font-weight: 650; }
+
+.site-header nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 5px;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lime);
+}
+
+.header-contact {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.header-contact > span {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.header-contact > span > i {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--theme-focus);
+  display: inline-block;
+}
+
+.header-location-name {
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.header-contact > .button {
+  position: relative;
+  border-radius: 8px;
+  padding: 11px 20px;
+  min-width: 102px;
+}
+
+/* 「聊聊」左侧的竖分隔线 */
+.header-contact > .button::before {
+  content: "";
+  position: absolute;
+  left: -17px;
+  height: 20px;
+  width: 1px;
+  background: var(--theme-soft);
+}
+
+/* ---------- 3. 主区：首页九宫格 ---------- */
+main { min-height: 0; }
+
+.bento-grid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: 1.08fr 1.1fr 0.7fr;
+  gap: var(--gap);
+}
+
+@media (min-width: 1101px) {
+  .bento-grid {
+    grid-template-rows: minmax(0, 1.08fr) minmax(0, 1.1fr) minmax(0, 0.85fr);
+  }
+}
+
+.bento-row {
+  display: grid;
+  min-height: 0;
+  gap: var(--gap);
+  grid-template-rows: minmax(0, 1fr);
+}
+
+/* 三行列宽刻意错开，形成「错落的 Bento」——不要统一成等分 */
+.top-row    { grid-template-columns: 1.8fr 1.05fr 1fr; }
+.middle-row { grid-template-columns: 1.75fr 1.1fr 1fr; }
+.bottom-row { grid-template-columns: 1.5fr 1.05fr 1.25fr; }
+
+/* ---------- 4. 页脚 ---------- */
+.site-footer {
+  height: var(--footer-h);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 9px;
+  color: var(--theme-muted);
+}
+
+.site-shell > .site-footer { margin-top: 8px; }
+
+.site-footer > span { white-space: nowrap; }
+
+.site-footer > div {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+
+.site-footer button,
+.site-footer a { font-size: 9px; white-space: nowrap; flex-shrink: 0; }
+
+/* 页脚里的格言：一行放不下时收成省略号（不带 nowrap 的话文字会竖着折成一列，
+   把这条写死高度的横条顶高） */
+.footer-motto { max-width: 180px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.footer-star { font-size: 15px; color: var(--theme-accent-ink); }
+
+/* 页脚的联系方式（邮箱 / GitHub）：窗口窄到放不下时，让自己带省略号缩掉，
+   不把这条固定高的横条撑破（页脚高度是写死的，一旦换行就溢出）。 */
+.site-footer a.footer-contact {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.site-footer a.footer-contact:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 窄窗口（<=620px）一行塞不下版权 + 邮箱 + GitHub 时，允许页脚换行：
+   放得下就和原来一样是 55px，放不下才长高，不会撑出横向滚动。 */
+@media (max-width: 620px) {
+  .site-footer {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 55px;
+    row-gap: 8px;
+  }
+}
+
+/* 桌面首页把页脚压扁，给九宫格多留 5px */
+@media (min-width: 1101px) {
+  .site-shell > .site-footer {
+    height: 24px;
+    margin-top: 4px;
+  }
+}
+
+/* ============================================================
+   5. 断点降级
+   ============================================================ */
+
+/* ---------- ≥1550px：整体放大一档 ---------- */
+@media (min-width: 1550px) {
+  :root {
+    --pad: 27px;
+    --shell-pad: 32px;
+  }
+}
+
+/* ---------- 1101–1200px：紧凑化 ---------- */
+@media (max-width: 1200px) and (min-width: 1101px) {
+  :root { --shell-pad: 20px; }
+
+  .site-header nav { gap: 24px; margin-left: 10px; }
+  .header-contact { gap: 24px; }
+  .header-contact > span { font-size: 10px; }
+}
+
+/* ---------- ≥1101px 且窗口较矮（≤830px）：再压一档，保住「一屏」 ---------- */
+@media (max-height: 830px) and (min-width: 1101px) {
+  .site-shell { min-height: 740px; }
+  :root { --header-h: 60px; }
+}
+
+/* ---------- ≤1100px：两列，卡片改固定高度，整页可滚动 ---------- */
+@media (max-width: 1100px) {
+  .site-shell {
+    height: auto;
+    min-height: 100svh;
+    padding: 0 22px;
+  }
+
+  .site-header { height: 80px; }
+
+  .brand > span { font-size: 26px; }
+
+  .site-header nav { gap: 22px; margin-left: 0; }
+
+  .header-contact > span { display: none; }
+  .header-contact > .button::before { display: none; }
+
+  /* 行合并：三行变一个两列网格，靠 display:contents 让卡片直接参与排布 */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    gap: 14px;
+  }
+
+  .bento-row { display: contents; }
+
+  .card { min-height: 280px; }
+
+  .hero-card    { grid-column: span 2; height: 350px; }
+  .photo-card   { height: 310px; }
+  .clock-card   { height: 310px; }
+  .project-card { grid-column: span 2; height: 340px; }
+  .article-card { height: 320px; }
+  .calendar-card { height: 320px; }
+  .checkin-card,
+  .collection-card { height: 255px; min-height: 255px; }
+  .music-card   { grid-column: span 2; height: 225px; min-height: 225px; }
+
+  .site-footer { height: 55px; font-size: 9px; }
+  .site-footer > div { gap: 12px; }
+}
+
+/* ---------- ≤620px：单列 ---------- */
+@media (max-width: 620px) {
+  :root { --pad: 21px; }
+
+  .site-shell { padding: 0 14px; }
+
+  .site-header {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 21px 5px 12px;
+  }
+
+  .brand > span { font-size: 22px; }
+
+  .header-contact { margin-left: auto; }
+  .header-contact > .button {
+    min-width: 80px;
+    min-height: 34px;
+    font-size: 12px;
+    padding: 8px 13px;
+  }
+
+  /* 导航独占一行，均分铺开 */
+  .site-header nav {
+    order: 3;
+    width: 100%;
+    justify-content: space-between;
+    gap: 0;
+    padding: 0 7px;
+  }
+
+  .site-header nav a { font-size: 13px; padding: 10px 5px 15px; }
+
+  .bento-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 13px;
+  }
+
+  .card, .hero-card, .project-card, .music-card { grid-column: auto; }
+
+  .hero-card { height: 355px; padding: 23px; }
+}
+
+/* 手机宽度上格言让位：先保证邮箱和 GitHub 完整显示（放得下就一直留着） */
+@media (max-width: 430px) {
+  .footer-motto { display: none; }
+}
+
+/* ---------- 动效偏好 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

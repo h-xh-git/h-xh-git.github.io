@@ -1,0 +1,1727 @@
+/* ============================================================
+   components.css — 卡片与可复用元件
+   九张卡已全部实现：第一行 Hero / 照片 / 时钟，第二行项目 / 文章 / 日历，
+   第三行站点信息 / 最近收集 / 音乐播放器。
+   尺寸取自模板 client/src/styles.css 实测值，中文标题的字距做了适配。
+   ============================================================ */
+
+/* ---------- 卡片基座 ---------- */
+.card {
+  position: relative;
+  min-width: 0;
+  padding: var(--pad);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--card);
+  overflow: hidden;
+}
+
+@media (max-width: 1200px) and (min-width: 1101px) {
+  .card { padding: 18px; }
+}
+
+/* ---------- 通用文字元件 ---------- */
+.eyebrow {
+  font-family: var(--font-display);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  line-height: 1.4;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ---------- 按钮 ---------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 40px;
+  padding: 11px 22px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 550;
+  white-space: nowrap;
+}
+
+.button.dark {
+  background: var(--ink);
+  color: var(--theme-on-button);
+}
+
+/* 描边款：Hero 里的邮箱用它，和实心的 GitHub 按钮区分主次 */
+.button.ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.button.ghost:hover {
+  background: var(--theme-soft);
+}
+
+.button .icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   第一行 · ① Hero 自我介绍卡
+   ============================================================ */
+.hero-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 22px 24px;
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  z-index: 2;
+}
+
+.hero-card h1 {
+  position: relative;
+  z-index: 1;
+  margin: 14px 0 9px;
+  max-width: 75%;
+  /* 中文标题无需模板 -2.5px 的紧字距，收到 -1.5px */
+  font-size: clamp(45px, 4.45vw, 76px);
+  font-weight: 750;
+  line-height: 1.13;
+  letter-spacing: -1.5px;
+}
+
+/* 标题下的柠檬绿高亮条：3.08em 宽 ≈ 三个汉字 */
+.hero-card h1::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 0.75em;
+  width: 3.08em;
+  height: 0.26em;
+  z-index: -1;
+  background: var(--lime);
+  transform: rotate(-0.8deg);
+}
+
+.headline-primary { display: block; line-height: 1.05; }
+
+.headline-secondary {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.76em;
+  line-height: 1.13;
+  letter-spacing: -1px;
+}
+
+.hero-copy {
+  z-index: 1;
+  width: 82%;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+.hero-copy p {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hero-button {
+  margin-top: auto;
+  min-height: 38px;
+  padding: 9px 22px;
+  border-radius: 30px;
+  letter-spacing: 1px;
+}
+
+/* Hero 底部的动作行（GitHub + 邮箱）：并排，窄了自动换行。
+   margin-top: auto 交给这一行（按钮自己不要再顶一次）；
+   margin-bottom 是为了避开右下角那行绝对定位的「A PERSONAL SPACE / 2026」。 */
+.hero-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  margin-bottom: 22px;
+  max-width: 100%;
+}
+
+.hero-actions .hero-button { margin-top: 0; }
+
+.hero-mail { letter-spacing: 0; }
+
+/* 320~360 这种极窄手机上邮箱那串字太长，收小一点，别把动作行挤出边 */
+@media (max-width: 360px) {
+  .hero-mail { font-size: 12px; padding-left: 14px; padding-right: 14px; }
+}
+
+.hero-bottom-note {
+  position: absolute;
+  right: 24px;
+  bottom: 25px;
+  font-family: var(--font-display);
+  font-size: 9px;
+  letter-spacing: 1.6px;
+  color: var(--muted);
+}
+
+.hero-side-note {
+  position: absolute;
+  right: 26px;
+  bottom: 24%;
+  font-family: Georgia, "Songti SC", serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+/* 头像 + 椭圆轨道（有头像时的形态） */
+.hero-celestial.has-avatar {
+  position: absolute;
+  right: 5%;
+  top: 9%;
+  width: 30%;
+  max-width: 230px;
+  aspect-ratio: 1;
+  pointer-events: none;
+}
+
+.hero-orbit {
+  position: absolute;
+  right: 0;
+  top: 17.5%;
+  width: 100%;
+  height: 65%;
+  transform: rotate(-34deg);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-orbit span {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
+.hero-orbit i {
+  position: absolute;
+  left: 96.98%;
+  top: 67.1%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--lime);
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.hero-avatar {
+  position: absolute;
+  inset: 18%;
+  z-index: 2;
+  display: block;
+  width: 64%;
+  height: 64%;
+  padding: 0;
+  border: 4px solid var(--card);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--theme-soft);
+  box-shadow: 0 0 0 1px var(--line);
+  transform: translate(-9%, -9%);
+  pointer-events: auto;
+}
+
+.hero-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+}
+
+.hero-card.has-avatar .hero-side-note {
+  right: 8%;
+  bottom: 23%;
+  width: 24%;
+  font-size: 9px;
+  letter-spacing: 0.8px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+@media (max-width: 1100px) and (min-width: 621px) {
+  .hero-celestial.has-avatar { right: 8%; top: 10%; width: 28%; }
+  .hero-card.has-avatar .hero-side-note { right: 10%; width: 26%; }
+}
+
+/* 窄屏下这条 24% 宽的小字会被挤成两行浮在卡片中间，直接隐藏 */
+@media (max-width: 620px) {
+  .hero-card.has-avatar .hero-side-note { display: none; }
+}
+
+/* ============================================================
+   第一行 · ② 照片卡
+   ============================================================ */
+.photo-card {
+  padding: 0;
+  background: var(--theme-image-bg);
+}
+
+.photo-open {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.photo-open > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 50%;
+  transition: transform 0.6s;
+}
+
+.photo-open:hover > img { transform: scale(1.035); }
+
+.photo-label {
+  position: absolute;
+  top: 19px;
+  left: 20px;
+  padding: 5px 9px;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #fff;
+  background: #25271ce0;
+  pointer-events: none;
+}
+
+.photo-caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 40px 20px 18px;
+  background: linear-gradient(transparent, #171b1399);
+  color: #fffefa;
+  pointer-events: none;
+}
+
+.photo-caption h2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 5px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.photo-caption span { font-size: 11px; }
+
+/* 右下角圆形箭头：照片卡里可能是 button，也可能是 <a> */
+.photo-caption :is(button, a) {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  background: var(--theme-surface);
+  color: var(--ink);
+  pointer-events: auto;
+}
+
+.photo-caption .icon { width: 23px; height: 23px; }
+
+/* ============================================================
+   第一行 · ③ 时钟卡（已按「不保留天气」精简）
+   ============================================================ */
+.clock-card {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 27px;
+  border-color: var(--theme-clock);
+  background: var(--theme-clock);
+  color: var(--theme-clock-ink);
+}
+
+.clock-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.clock-top .eyebrow {
+  min-width: 0;
+  overflow: hidden;
+  font-size: 9px;
+  letter-spacing: 1.7px;
+  color: var(--theme-clock-ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clock-digits {
+  margin: auto -5px 10px;
+  font-family: var(--font-body);
+  font-size: clamp(66px, 6.5vw, 112px);
+  font-weight: 500;
+  letter-spacing: -5px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.clock-digits i { font-style: normal; }
+
+.clock-digits > span { color: var(--lime); }
+
+.clock-date {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: auto;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.clock-bottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 17px;
+  padding-top: 19px;
+  border-top: 1px solid var(--theme-clock-line);
+  font-family: var(--font-display);
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--theme-clock-ink);
+}
+
+.clock-bottom i {
+  width: 8px;
+  height: 8px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--theme-clock-accent);
+}
+
+/* ============================================================
+   通用 · 卡片顶部一行 + 文字按钮
+   ============================================================ */
+.section-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.section-top h2 {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.5px;
+}
+
+.section-top > div {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.text-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.text-button:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+
+/* ============================================================
+   第二行 · ④ 项目卡
+   ============================================================ */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  padding: 17px 22px 11px;
+}
+
+.project-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+  margin-top: 12px;
+}
+
+.project-title h2 {
+  min-width: 0;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 700;
+  /* 中文标题字距比模板的 -1.8px 收一点 */
+  letter-spacing: -1.5px;
+  line-height: 1.08;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-title > span {
+  flex-shrink: 0;
+  padding: 5px 10px;
+  border-radius: 8px;
+  background: var(--theme-soft);
+  font-size: 11px;
+}
+
+.project-summary {
+  margin: 4px 0 12px;
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.project-preview {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  padding: 0;
+  border: 5px solid var(--theme-line);
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--theme-soft);
+  text-align: left;
+}
+
+.project-preview.has-cover {
+  border: 0;
+  background: transparent;
+}
+
+.project-cover {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 无封面时用 HTML 画的笔记应用示意窗（模板自带的设计）
+   注意：这里的垂直尺寸比模板原值收了一些，因为示例窗要挤进 84~130px 高的预览区；
+   仍放不下时由 assets/js/fit.js 等比缩放兜底，不会裁切。 */
+.demo-window {
+  transform-origin: top left;
+  display: flex;
+  width: 100%;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--theme-surface);
+  font-size: 10px;
+  text-align: left;
+  pointer-events: none;
+}
+
+.demo-window aside {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 21%;
+  flex-shrink: 0;
+  padding: 5px 6px;
+  overflow: hidden;
+  background: var(--theme-soft);
+}
+
+.demo-window aside strong {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.demo-window aside strong svg {
+  width: 24px;
+  height: 24px;
+  padding: 3px;
+  border-radius: 5px;
+  background: #e1edc7;
+  color: #759d39;
+}
+
+.demo-window aside > span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 3px 7px;
+  font-size: 9px;
+  color: #595e53;
+  /* 窄屏下侧栏只有 60~70px 宽，不换行更干净 */
+  white-space: nowrap;
+}
+
+.demo-window aside > span.active {
+  border-radius: 3px;
+  background: var(--theme-surface);
+  color: var(--ink);
+}
+
+.demo-window aside > span.active svg { color: #8baa3b; }
+
+.demo-main {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 13px;
+}
+
+.demo-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.demo-toolbar > span {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 6px;
+  height: 22px;
+  padding: 4px 7px;
+  border: 1px solid var(--theme-line);
+  border-radius: 4px;
+  font-size: 8px;
+  color: #999e91;
+}
+
+.demo-toolbar i {
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 22px;
+  border-radius: 4px;
+  background: var(--lime);
+}
+
+.demo-main h3 {
+  margin-top: 7px;
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+}
+
+.demo-main p {
+  margin: 3px 0 6px;
+  overflow: hidden;
+  font-size: 8px;
+  color: #868c7b;
+  white-space: nowrap;
+}
+
+.demo-notes { display: flex; gap: 9px; }
+
+.demo-notes > div {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  padding: 4px;
+  border: 1px solid var(--theme-line);
+  border-radius: 4px;
+}
+
+.demo-notes img {
+  width: 36%;
+  height: 46px;
+  border-radius: 3px;
+  object-fit: cover;
+}
+
+.demo-notes span {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.demo-notes strong { font-size: 8px; font-weight: 600; }
+
+.demo-notes small {
+  overflow: hidden;
+  font-size: 6px;
+  color: #9a9e92;
+  white-space: nowrap;
+}
+
+.demo-notes em {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 5px;
+  font-size: 7px;
+  font-style: normal;
+  color: #919687;
+}
+
+/* ============================================================
+   第二行 · ⑤ 文章卡
+   ============================================================ */
+.article-card {
+  display: flex;
+  flex-direction: column;
+  padding: 17px 20px 12px;
+}
+
+/* 三篇等分铺满，不靠滚动 */
+.home-articles {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.home-article {
+  container: article-row / size;
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+}
+
+.home-article > img {
+  width: auto;
+  height: 100%;
+  max-height: 60px;
+  aspect-ratio: 16 / 9;
+  flex-shrink: 0;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.home-article > span {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-self: stretch;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--theme-line);
+}
+
+.home-article:last-child > span { border-bottom: 0; }
+
+.home-article strong {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
+.home-article .article-excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #78816b;
+}
+
+/* 无标题时让摘要顶上，两行显示 */
+.home-article.untitled .article-excerpt {
+  -webkit-line-clamp: 2;
+  font-size: 13px;
+  color: var(--ink);
+}
+
+/* 行高够时字号自动升一档 */
+@container article-row (min-height: 76px) {
+  .home-article > span { gap: 4px; }
+  .home-article strong,
+  .home-article.untitled .article-excerpt { font-size: 14px; }
+  .home-article .article-excerpt { font-size: 12px; }
+}
+
+/* ============================================================
+   第二行 · ⑥ 日历卡（真实逻辑，见 assets/js/calendar.js）
+   ============================================================ */
+.calendar-card {
+  display: flex;
+  flex-direction: column;
+  padding: 17px 21px 18px;
+}
+
+.calendar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calendar-top h2 {
+  font-size: 24px;
+  font-weight: 650;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+
+/* 模板里这个 eyebrow 是行内元素，行框会被父级字号（16px）撑高到 24px，
+   在只有 269px 高的卡里挤掉了日期网格的空间。改为块级并收紧行高。 */
+.calendar-top .eyebrow {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 1.6px;
+  line-height: 1.2;
+}
+
+.month-controls {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--muted);
+}
+
+.month-controls button {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+}
+
+.month-controls button:hover { background: var(--theme-soft); }
+
+.month-controls > span {
+  min-width: 32px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.calendar-grid {
+  display: grid;
+  flex: 1;
+  /* min-height:0 去掉 flex 项的自动最小尺寸，网格高度完全由剩余空间决定，
+     格子尺寸再按这个高度由 calendar.js 算出来，卡再矮也不会把底部提示挤掉 */
+  min-height: 0;
+  grid-template-columns: repeat(7, 1fr);
+  grid-auto-rows: minmax(0, 1fr);
+  gap: 1px;
+  align-items: center;
+  margin-top: 10px;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+.calendar-grid span {
+  display: grid;
+  place-items: center;
+  justify-self: center;
+  width: var(--cal-cell, 25px);
+  height: var(--cal-cell, 25px);
+  font-size: 12px;
+}
+
+.calendar-grid .weekday {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.calendar-grid .today {
+  border-radius: 50%;
+  background: var(--lime);
+  font-weight: 650;
+}
+
+.calendar-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 24px;
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  text-align: left;
+}
+
+.calendar-footer i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lime);
+}
+
+/* ============================================================
+   第三行 · ⑦ 站点信息卡
+   文案是静态的；只有「在站天数」和「音乐首数」由
+   assets/js/site.js 现算填入，避免当面变旧。
+   ============================================================ */
+.siteinfo-card {
+  display: flex;
+  flex-direction: column;
+  padding: 17px 21px 16px;
+  container: siteinfo / size;
+}
+
+/* 卡高 ≤180px 时收一档，避免矮窗口下「建站 / 最近更新」被裁掉 */
+/* @container 块必须放在本卡所有基础规则之后，否则同优先级会被下面的基础样式盖掉 */
+
+/* 建站天数徽标 */
+.site-days {
+  padding: 3px 9px;
+  border-radius: 20px;
+  background: var(--theme-soft);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.site-stats {
+  display: grid;
+  flex: 1;
+  align-content: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.site-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.site-stats b {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 2.15vw, 36px);
+  font-weight: 700;
+  letter-spacing: -1.2px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.site-stats span {
+  font-size: 11px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* 一行两件：左边「访问与评价」按钮，右边建站 / 最近更新。
+   两个是同一个 flex 行，日期那列用 margin-left:auto 贴右；
+   窄了就自动换行成「按钮一行 + 日期两行」。 */
+.site-info-lines {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-top: auto;
+  padding-top: 13px;
+  border-top: 1px solid var(--theme-line);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.site-meta {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+  margin-left: auto;
+}
+
+.site-meta > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+}
+
+.site-info-lines b {
+  font-weight: 500;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* 「访问与评价」按钮：沿用 Hero 那颗深色按钮的样子（深底 + 白字 + ↗），
+   按站点信息卡的字号缩一档，做成胶囊 */
+.review-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 28px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--theme-on-button);
+  font-size: 11.5px;
+  font-weight: 550;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+  transition: background var(--ease);
+}
+
+.review-button:hover { background: #34372f; }
+
+.review-button .icon {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   第三行 · ⑧ 最近收集卡
+   两条收藏并排，缩略图位支持放图（<img>）或留类型字形占位。
+   ============================================================ */
+.collection-card {
+  display: flex;
+  flex-direction: column;
+  padding: 17px 20px 15px;
+  container: collection / size;
+}
+
+/* 数据没加载出来时别留一张空卡（.empty-note 是首页卡与栏目页共用的通用版） */
+.collection-empty,
+.empty-note {
+  grid-column: 1 / -1;
+  align-self: center;
+  margin: 0;
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* 底部分类计数：链接 / 书 / 影 / 音 / 足迹 */
+.collection-kinds {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 12px;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--theme-line);
+  font-size: 10.5px;
+  color: var(--muted);
+}
+
+.collection-kinds .kind {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.collection-kinds b {
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.collection-card h2 {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.5px;
+}
+
+.collection-list {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+  margin-top: 12px;
+}
+
+.collection-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  text-align: left;
+}
+
+.collection-thumb {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  overflow: hidden;
+  /* 放了自己的预览图（<img>）时底色会被盖住，这里只服务占位态 */
+  background: linear-gradient(145deg, #eef4dc, var(--theme-soft) 72%);
+  color: #86a63a;
+  transition: transform 0.5s;
+}
+
+.collection-item:hover .collection-thumb { transform: scale(1.03); }
+
+.collection-thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collection-thumb svg { width: 26px; height: 26px; opacity: 0.85; }
+
+.collection-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.collection-text strong {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 12.5px;
+  font-weight: 550;
+  line-height: 1.45;
+}
+
+.collection-text small {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+/* ============================================================
+   第三行 · ⑨ 音乐播放器卡（真实播放，见 assets/js/player.js）
+   歌单来自 assets/music/playlist.js，顺序即列表顺序。
+   ============================================================ */
+.music-card {
+  display: flex;
+  flex-direction: column;
+  padding: 17px 20px 14px;
+  /* 矮窗口下桌面第三行只有 175px 左右，内容会顶到 185px。
+     用容器高度做降级：卡够高就照常舒展，卡矮了才收尺寸。 */
+  container: music / size;
+}
+
+/* 卡高 ≤202px 时收一档（矮窗口桌面端会走到这里；≤1100px 的 225px 不会） */
+/* 同站信息卡：@container 块挪到本卡基础规则之后，见文件末尾 */
+
+/* 歌单开合按钮 */
+.music-list-toggle svg {
+  width: 12px;
+  height: 12px;
+  transition: transform var(--ease);
+}
+
+.music-list-toggle.is-open svg { transform: rotate(180deg); }
+
+.music-body {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  margin-top: 12px;
+}
+
+/* 封面位：没放封面图时用一对律动条占位，播放时跳动 */
+.music-cover {
+  display: flex;
+  flex-shrink: 0;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 3px;
+  width: 52px;
+  height: 52px;
+  padding-bottom: 15px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--theme-clock);
+}
+
+.music-cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.music-cover i {
+  width: 4px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--theme-clock-accent);
+  opacity: 0.6;
+}
+
+.music-card.is-playing .music-cover i {
+  opacity: 1;
+  animation: music-bar 1.05s ease-in-out infinite;
+}
+
+.music-card.is-playing .music-cover i:nth-child(2) { animation-delay: 0.16s; }
+.music-card.is-playing .music-cover i:nth-child(3) { animation-delay: 0.34s; }
+.music-card.is-playing .music-cover i:nth-child(4) { animation-delay: 0.5s; }
+
+@keyframes music-bar {
+  0%, 100% { height: 9px; }
+  50% { height: 24px; }
+}
+
+.music-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.music-title {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.music-index {
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 进度条 ---------- */
+.music-progress-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 11px;
+  font-size: 10.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.music-progress-row > span {
+  flex-shrink: 0;
+  min-width: 30px;
+  text-align: center;
+}
+
+.music-progress { flex: 1; min-width: 0; }
+
+/* 两条 range 共用外观：轨道 3px，已播部分用 --p 控制填充比例（由 JS 写） */
+input[type="range"].music-progress,
+input[type="range"].music-volume {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 14px;
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+input[type="range"].music-progress::-webkit-slider-runnable-track,
+input[type="range"].music-volume::-webkit-slider-runnable-track {
+  height: 3px;
+  border-radius: 2px;
+  background: linear-gradient(
+    to right,
+    var(--ink) 0 var(--p, 0%),
+    var(--theme-line) var(--p, 0%) 100%
+  );
+}
+
+input[type="range"].music-progress::-webkit-slider-thumb,
+input[type="range"].music-volume::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 11px;
+  height: 11px;
+  margin-top: -4px;
+  border: 2px solid var(--card);
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 1px var(--theme-line);
+}
+
+input[type="range"].music-progress::-moz-range-track,
+input[type="range"].music-volume::-moz-range-track {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--theme-line);
+}
+
+input[type="range"].music-progress::-moz-range-progress,
+input[type="range"].music-volume::-moz-range-progress {
+  height: 3px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+input[type="range"].music-progress::-moz-range-thumb,
+input[type="range"].music-volume::-moz-range-thumb {
+  width: 11px;
+  height: 11px;
+  border: 2px solid var(--card);
+  border-radius: 50%;
+  background: var(--ink);
+}
+
+input[type="range"]:disabled { cursor: default; opacity: 0.5; }
+
+input[type="range"]:focus-visible {
+  outline: 3px solid var(--theme-focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- 控制条 ---------- */
+.music-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 11px;
+}
+
+.music-controls button {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.music-controls button:hover:not(:disabled) { background: var(--theme-soft); }
+
+.music-controls svg { width: 17px; height: 17px; }
+
+.music-controls .music-play {
+  width: 36px;
+  height: 36px;
+  background: var(--ink);
+  color: var(--theme-on-button);
+}
+
+.music-controls .music-play:hover:not(:disabled) { background: #33362c; }
+
+.music-controls .music-play svg { width: 19px; height: 19px; }
+
+.music-play .i-pause { display: none; }
+.music-card.is-playing .music-play .i-play { display: none; }
+.music-card.is-playing .music-play .i-pause { display: block; }
+
+/* 音量 */
+.music-volume-wrap {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  margin-left: auto;
+  color: var(--muted);
+}
+
+.music-volume-wrap button { width: 24px; height: 24px; }
+.music-volume-wrap button svg { width: 15px; height: 15px; }
+.music-mute.is-muted { color: var(--ink); }
+
+input[type="range"].music-volume { width: 50px; flex: none; }
+
+/* 静音时音量条置灰 */
+.music-mute.is-muted ~ input[type="range"].music-volume { opacity: 0.45; }
+
+/* ---------- 歌单浮层 ---------- */
+.music-list {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  padding: 17px 20px 14px;
+  background: var(--card);
+}
+
+.music-list[hidden] { display: none; }
+
+.music-list > header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.music-list > header h2 {
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+}
+
+.music-list-items {
+  flex: 1;
+  min-height: 0;
+  margin: 10px -4px 0 0;
+  padding: 0 4px 0 0;
+  overflow-y: auto;
+  list-style: none;
+  overscroll-behavior: contain;
+}
+
+.music-list-items::-webkit-scrollbar { width: 5px; }
+.music-list-items::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background: var(--theme-line);
+}
+
+.music-list-items button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 5px 6px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: left;
+}
+
+.music-list-items button:hover { background: var(--theme-soft); }
+
+.music-list-items .n {
+  flex-shrink: 0;
+  width: 17px;
+  font-size: 10px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.music-list-items .t {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.music-list-items li.current .t { font-weight: 650; }
+.music-list-items li.current .n { color: var(--theme-focus); }
+
+/* ============================================================
+   全站迷你音乐条（栏目页）
+   由 assets/js/player.js 在「这一会儿确实在放歌」时才造出来并显示，
+   没在放歌就完全看不见。首页用的是那张大卡 .music-card，不会有这条。
+   ============================================================ */
+.music-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  max-width: min(430px, calc(100vw - 24px));
+  padding: 7px 10px 7px 8px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  /* 颜色就是 --card，留一点透好配下面的毛玻璃 */
+  background: rgba(255, 254, 250, 0.93);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 12px 30px rgba(32, 34, 30, 0.12);
+  font-size: 11.5px;
+  color: var(--ink);
+}
+
+.music-bar[hidden] { display: none; }
+
+.music-bar .music-play {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--theme-on-button);
+  cursor: pointer;
+  transition: background var(--ease);
+}
+
+.music-bar .music-play:hover { background: #33362c; }
+
+.music-bar .music-play svg { width: 15px; height: 15px; }
+
+.music-bar .music-play .i-pause { display: none; }
+
+.music-bar.is-playing .music-play .i-play { display: none; }
+
+.music-bar.is-playing .music-play .i-pause { display: block; }
+
+/* 续播被浏览器拦下：播放键脉动，配合「点一下继续」的标题 */
+.music-bar.is-pending .music-play,
+.music-card.is-pending .music-play { animation: music-bar-pulse 1.7s ease-in-out infinite; }
+
+@keyframes music-bar-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(196, 227, 72, 0.75); }
+  55% { box-shadow: 0 0 0 8px rgba(196, 227, 72, 0); }
+}
+
+.music-bar-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  /* 宽度写死：歌名长短不改变条子的粗细 */
+  width: 150px;
+  min-width: 0;
+}
+
+.music-bar-meta .music-title {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.music-bar .music-progress {
+  flex: 0 0 auto;
+  width: 100%;
+  height: 12px;
+}
+
+.music-bar .music-elapsed {
+  flex-shrink: 0;
+  min-width: 30px;
+  font-size: 10px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.music-bar .bar-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background var(--ease), color var(--ease);
+}
+
+.music-bar .bar-icon:hover {
+  background: var(--theme-soft);
+  color: var(--ink);
+}
+
+.music-bar .bar-icon svg { width: 13px; height: 13px; }
+
+@media (max-width: 620px) {
+  .music-bar { bottom: 10px; gap: 7px; }
+  .music-bar-meta { width: 104px; }
+  .music-bar .music-elapsed { display: none; }
+}
+
+/* ============================================================
+   访问与评价弹窗（首页站点信息卡那颗按钮打开）
+   面板里装 giscus，评论存在 GitHub Discussions；
+   脚本由 assets/js/review.js 在第一次点开时才注入。
+   ============================================================ */
+.review-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* display:flex 会盖掉浏览器默认的 [hidden]，这条不能删 */
+.review-modal[hidden] { display: none; }
+
+.review-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(32, 34, 30, 0.42);
+}
+
+.review-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: min(680px, 100%);
+  max-height: min(78svh, 680px);
+  padding: 18px 20px 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  box-shadow: 0 18px 50px rgba(32, 34, 30, 0.16);
+}
+
+.review-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  flex: 0 0 auto;
+}
+
+.review-head h2 {
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: -0.2px;
+}
+
+.review-sub {
+  margin-top: 4px;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.review-close {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: var(--muted);
+  transition: background var(--ease), color var(--ease);
+}
+
+.review-close:hover {
+  background: var(--theme-soft);
+  color: var(--ink);
+}
+
+.review-close svg { width: 16px; height: 16px; }
+
+.review-body {
+  flex: 1;
+  min-height: 0;
+  margin-top: 14px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.review-body::-webkit-scrollbar { width: 6px; }
+.review-body::-webkit-scrollbar-thumb {
+  border-radius: 6px;
+  background: var(--theme-number);
+}
+
+/* giscus 的 iframe 到手前先留出高度，免得面板先塌再弹 */
+.review-body .giscus { min-height: 240px; }
+
+/* 评论区用不了时的说明（本地双击打开 / 还没接线） */
+.review-note {
+  padding: 26px 6px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: var(--muted);
+  text-align: center;
+}
+
+.review-note[hidden] { display: none; }
+.review-note a { color: var(--theme-focus); text-decoration: underline; }
+
+/* 弹窗打开时锁住底下的页面滚动 */
+body.review-open { overflow: hidden; }
+
+@media (max-width: 620px) {
+  .review-modal { padding: 14px 12px; }
+  .review-panel { max-height: min(84svh, 680px); padding: 15px 15px 14px; }
+  .review-head h2 { font-size: 16px; }
+}
+
+/* ============================================================
+   第三行 · 卡片按自身高度降级
+   桌面第三行的实际高度随窗口高度变：900px 视口约 219px，
+   740px 视口约 175px。内容在 175px 下会顶出来，所以用容器查询
+   在「卡矮了」时才收尺寸，卡够高时保持舒展的外观。
+   注意：这两块必须放在上面所有基础规则之后——同优先级下，
+   写在基础规则前面会被后面的基础样式覆盖。
+   ============================================================ */
+
+@container siteinfo (max-height: 180px) {
+  .site-stats { margin-top: 11px; }
+  .site-stats b { font-size: 24px; }
+  .site-info-lines { gap: 6px 10px; padding-top: 10px; font-size: 11px; }
+  .review-button { min-height: 24px; padding: 4px 10px; gap: 5px; font-size: 10.5px; }
+}
+
+@container music (max-height: 202px) {
+  .music-body { gap: 10px; margin-top: 9px; }
+  .music-cover { width: 42px; height: 42px; padding-bottom: 12px; }
+  .music-progress-row { margin-top: 8px; }
+  .music-controls { gap: 5px; padding-top: 7px; }
+  .music-controls button { width: 27px; height: 27px; }
+  .music-controls .music-play { width: 32px; height: 32px; }
+  .music-title { font-size: 13px; }
+}
+
+/* 收集卡在矮窗口下要给「两条 + 分类计数」腾地方，缩略图位留 50px 以上 */
+@container collection (max-height: 200px) {
+  .collection-list { gap: 9px; margin-top: 9px; }
+  .collection-item { gap: 6px; }
+  .collection-text strong { font-size: 12px; }
+  .collection-text small { font-size: 10px; }
+  .collection-kinds { gap: 4px 10px; margin-top: 7px; padding-top: 7px; font-size: 10px; }
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="fresh">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f6f2" />
+  <meta name="description" content="项目 —— 把好奇心，变成可以触碰的作品。" />
+  <title>项目 · 夜坐所安的小屋</title>
+
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/page.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到页面内容</a>
+
+<div class="site-shell page-shell">
+
+  <!-- ================= 站头 ================= -->
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="夜坐所安的小屋 首页">
+      <span>夜坐所安的小屋</span>
+    </a>
+
+    <nav aria-label="主导航">
+      <a href="../index.html">首页</a>
+      <a href="index.html" class="active" aria-current="page">项目</a>
+      <a href="../essays/index.html">随笔</a>
+      <a href="../photos/index.html">相册</a>
+      <a href="../collections/index.html">收集</a>
+      <a href="../friends/index.html">友链</a>
+    </nav>
+
+    <div class="header-contact">
+      <span>
+        <i></i>
+        <span class="header-location-name" title="广州, CN">广州, CN</span>
+      </span>
+      <a class="button dark" href="mailto:huang_xiang_hua@163.com">
+        聊聊
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17 17 7M9 7h8v8" />
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= 主区 ================= |
+       data-base："../" 用来把数据文件里写死的站内路径（封面）补成当前这一层能用的相对路径 -->
+  <main id="main" tabindex="-1" class="page-main" data-projects data-base="../">
+
+    <div class="page-head">
+      <div>
+        <span class="eyebrow">01 / Projects</span>
+        <h1>项目</h1>
+        <p>把好奇心，变成可以触碰的作品。</p>
+      </div>
+      <span class="page-number" aria-hidden="true">01</span>
+    </div>
+
+    <div class="page-summary">
+      <span class="count" data-project-count></span>
+    </div>
+
+    <!-- 卡片由 assets/js/projects-page.js 生成 -->
+    <ul class="project-list" data-project-list></ul>
+
+    <!-- 没项目时露出来的提示（有内容时由 JS 藏起来） -->
+    <p class="empty-note" data-project-empty hidden>
+      还没放项目 —— 数据在 <b>assets/data/projects.js</b>，加一个对象这里就多一张卡。
+    </p>
+
+  </main>
+
+  <!-- ================= 页脚 ================= -->
+  <footer class="site-footer">
+    <span>© 2026 夜坐所安的小屋</span>
+    <div>
+      <a class="footer-contact" href="mailto:huang_xiang_hua@163.com" title="发邮件给我">huang_xiang_hua@163.com</a>
+      <a class="footer-contact" href="https://github.com/h-xh-git" target="_blank" rel="noopener" aria-label="GitHub：h-xh-git" title="github.com/h-xh-git">GitHub · h-xh-git</a>
+      <button type="button" data-pending="素材说明">素材说明</button>
+      <span class="footer-motto">把好奇心变成作品。</span>
+      <span class="footer-star">✳</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../assets/data/projects.js"></script>
+<script src="../assets/js/projects-page.js"></script>
+<script src="../assets/music/playlist.js"></script>
+<script src="../assets/js/player.js"></script>
+<script src="../assets/js/nav.js"></script>
+</body>
+</html>

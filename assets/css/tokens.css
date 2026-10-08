@@ -1,0 +1,53 @@
+/* ============================================================
+   tokens.css — 设计令牌
+   取值来自模板 client/src/styles.css 的 :root 与 themes.css。
+   改这里就能整体换色、换间距、换字体。
+   ============================================================ */
+
+/* 字体：模板用 Google Fonts 引入。若你的站点要完全离线/零外部请求，
+   把下面这行删掉，改成 @font-face 指向 assets/fonts/ 里的本地字体文件。 */
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;450;500;550;600;650;700;750&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+  /* ---------- 基础色（清新绿 / fresh，模板默认主题） ---------- */
+  --ink: #20221e;          /* 主文字 */
+  --muted: #7b7d75;        /* 次要文字 */
+  --paper: #f7f6f2;        /* 页面底色 */
+  --line: #e8e8e1;         /* 分隔线 / 卡片边框 */
+  --lime: #d4f36e;         /* 强调色：高亮条、冒号、今天、签到钮 */
+  --card: #fffefa;         /* 卡片底色 */
+
+  /* ---------- 尺寸节奏 ---------- */
+  --gap: 12px;             /* 卡片间距（≥1101px） */
+  --pad: 24px;             /* 卡片内边距（≥1550px 变 27px） */
+  --shell-pad: 30px;       /* 外壳左右内边距 */
+  --shell-max: 1920px;     /* 外壳最大宽 */
+  --header-h: 68px;        /* 站头高度 */
+  --footer-h: 29px;        /* 页脚高度（首页 24px） */
+
+  /* ---------- 语义别名：组件只引用这一层，换主题时不必改组件 ---------- */
+  --theme-muted: var(--muted);
+  --theme-line: var(--line);
+  --theme-soft: #f3f4f0;         /* 浅色底块：徽标、按钮禁用态 */
+  --theme-surface: #fffefa;      /* 弹窗 / 浮层底 */
+  --theme-image-bg: #d8dbc9;     /* 图片未加载时的底色 */
+  --theme-number: #e2e5d7;       /* 栏目页大编号 */
+  --theme-focus: #779b1c;        /* 键盘聚焦描边 */
+  --theme-accent-ink: #c4e348;   /* 品牌句点等强调文字 */
+  --theme-on-button: #fffefa;    /* 深色按钮上的文字 */
+  --theme-on-accent: #22261a;    /* 强调色块上的文字 */
+
+  /* 时钟卡（深色卡）专用 */
+  --theme-clock: #23261f;
+  --theme-clock-ink: #fbfbf5;
+  --theme-clock-line: #53564b;
+  --theme-clock-accent: #d9f89e;
+
+  /* ---------- 字体 ---------- */
+  --font-body: "DM Sans", -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --font-display: "Space Grotesk", "DM Sans", -apple-system, sans-serif;
+
+  /* ---------- 过渡 ---------- */
+  --ease: 0.16s;
+}

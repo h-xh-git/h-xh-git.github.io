@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="fresh">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f6f2" />
+  <meta name="description" content="随笔 —— 写下来的一些东西，长短不一。" />
+  <title>随笔 · 夜坐所安的小屋</title>
+
+  <link rel="stylesheet" href="../assets/css/tokens.css" />
+  <link rel="stylesheet" href="../assets/css/layout.css" />
+  <link rel="stylesheet" href="../assets/css/components.css" />
+  <link rel="stylesheet" href="../assets/css/page.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到页面内容</a>
+
+<div class="site-shell page-shell">
+
+  <!-- ================= 站头 ================= -->
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="夜坐所安的小屋 首页">
+      <span>夜坐所安的小屋</span>
+    </a>
+
+    <nav aria-label="主导航">
+      <a href="../index.html">首页</a>
+      <a href="../projects/index.html">项目</a>
+      <a href="index.html" class="active" aria-current="page">随笔</a>
+      <a href="../photos/index.html">相册</a>
+      <a href="../collections/index.html">收集</a>
+      <a href="../friends/index.html">友链</a>
+    </nav>
+
+    <div class="header-contact">
+      <span>
+        <i></i>
+        <span class="header-location-name" title="广州, CN">广州, CN</span>
+      </span>
+      <a class="button dark" href="mailto:huang_xiang_hua@163.com">
+        聊聊
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17 17 7M9 7h8v8" />
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= 主区 ================= |
+       data-base："../" 用来把数据文件里写死的站内路径（配图）补成当前这一层能用的相对路径 -->
+  <main id="main" tabindex="-1" class="page-main" data-base="../">
+
+    <div class="page-head">
+      <div>
+        <span class="eyebrow">02 / Essays</span>
+        <h1>随笔</h1>
+        <p>写下来的一些东西，长短不一。想到什么写什么，不一定成篇。</p>
+      </div>
+      <span class="page-number" aria-hidden="true">02</span>
+    </div>
+
+    <div class="page-summary">
+      <span class="count" data-essay-count></span>
+    </div>
+
+    <!-- 列表由 assets/js/essays.js 填 -->
+    <section class="collect-section" data-essay-list></section>
+
+  </main>
+
+  <!-- ================= 页脚 ================= -->
+  <footer class="site-footer">
+    <span>© 2026 夜坐所安的小屋</span>
+    <div>
+      <a class="footer-contact" href="mailto:huang_xiang_hua@163.com" title="发邮件给我">huang_xiang_hua@163.com</a>
+      <a class="footer-contact" href="https://github.com/h-xh-git" target="_blank" rel="noopener" aria-label="GitHub：h-xh-git" title="github.com/h-xh-git">GitHub · h-xh-git</a>
+      <button type="button" data-pending="素材说明">素材说明</button>
+      <span class="footer-motto">把好奇心变成作品。</span>
+      <span class="footer-star">✳</span>
+    </div>
+  </footer>
+
+</div>
+
+<script src="../assets/data/essays.js"></script>
+<script src="../assets/js/essays-page.js"></script>
+<script src="../assets/music/playlist.js"></script>
+<script src="../assets/js/player.js"></script>
+<script src="../assets/js/nav.js"></script>
+</body>
+</html>

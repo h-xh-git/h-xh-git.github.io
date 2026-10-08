@@ -1,0 +1,1402 @@
+/* ============================================================
+   page.css — 栏目页通用样式
+   首页是「一屏九宫格」，栏目页是可滚动的长页，所以第一件事是把外壳
+   从固定 100svh 放开。后面几个栏目页（项目 / 随笔 / 相册 / 友链）共用本文件。
+   本文件必须在 layout.css 之后加载。
+   ============================================================ */
+
+/* ---------- 0. 外壳：取消一屏限制，允许滚动 ---------- */
+.page-shell {
+  height: auto;
+  min-height: 100svh;
+}
+
+.page-main {
+  flex: 1;
+  min-height: 0;
+  /* 上边距收窄，页头（01 / Projects…）跟着顶到站头下面，别浮在半空 */
+  padding: 8px 0 64px;
+}
+
+.page-shell > .site-footer {
+  height: auto;
+  min-height: 24px;
+  margin-top: 0;
+  padding-bottom: 20px;
+}
+
+/* ---------- 1. 页头 ---------- */
+.page-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.page-head h1 {
+  margin: 12px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.6vw, 68px);
+  font-weight: 700;
+  letter-spacing: -2px;
+  line-height: 1.05;
+}
+
+.page-head p {
+  margin-top: 12px;
+  max-width: 44ch;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* 栏目页大编号，用 tokens 里的 --theme-number */
+.page-number {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: clamp(58px, 8vw, 132px);
+  font-weight: 700;
+  line-height: 0.78;
+  letter-spacing: -5px;
+  color: var(--theme-number);
+  user-select: none;
+}
+
+@media (max-width: 620px) {
+  .page-number { display: none; }
+}
+
+/* ---------- 2. 分类概况 ---------- */
+.page-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 18px;
+  padding-top: 16px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* display:flex 会盖掉浏览器默认的 [hidden]，要自己补一条 */
+.page-summary[hidden] { display: none; }
+
+.page-summary .kind {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.page-summary b {
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ---------- 3. 分区 ---------- */
+.collect-section { margin-top: 48px; }
+
+.collect-section[hidden] { display: none; }
+
+.collect-section > header {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.collect-section > header h2 {
+  font-size: 22px;
+  font-weight: 650;
+  letter-spacing: -0.6px;
+}
+
+.collect-section > header .count {
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+}
+
+.collect-empty {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---------- 4. 链接列表 ---------- */
+.link-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 16px;
+  align-items: center;
+  gap: 18px;
+  padding: 15px 14px;
+  border-bottom: 1px solid var(--theme-line);
+  transition: background var(--ease), color var(--ease);
+}
+
+.link-item:hover { background: var(--theme-soft); }
+
+.link-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.link-title {
+  overflow: hidden;
+  font-size: 15px;
+  font-weight: 550;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-host {
+  overflow: hidden;
+  font-size: 11.5px;
+  color: var(--muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.link-date {
+  font-size: 12px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.link-item > svg {
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+}
+
+.link-item:hover > svg { color: var(--ink); }
+
+/* ---------- 5. 书影音：三组并排 ---------- */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .media-grid { grid-template-columns: minmax(0, 1fr); gap: 30px; }
+}
+
+.media-group > h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.media-group > h3 svg {
+  width: 15px;
+  height: 15px;
+  color: #8baa3b;
+}
+
+.media-list {
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.media-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--theme-line);
+}
+
+.media-title {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
+.media-meta {
+  flex-shrink: 0;
+  font-size: 11.5px;
+  color: var(--muted);
+  text-align: right;
+}
+
+/* ---------- 6. 足迹：时间轴 ---------- */
+.trail {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* 竖线：x=5px，正好穿过下面 11px 圆点的圆心 */
+.trail::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: var(--line);
+}
+
+.trail-item {
+  position: relative;
+  padding: 0 0 34px 30px;
+}
+
+.trail-item:last-child { padding-bottom: 0; }
+
+.trail-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--lime);
+  /* 用页面底色描一圈，圆点压在竖线上也干净 */
+  box-shadow: 0 0 0 4px var(--paper);
+}
+
+.trail-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+}
+
+.trail-head h3 {
+  font-size: 18px;
+  font-weight: 650;
+  letter-spacing: -0.5px;
+  line-height: 1.3;
+}
+
+.trail-date {
+  font-size: 11.5px;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.trail-place {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.trail-note {
+  margin-top: 9px;
+  max-width: 62ch;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.trail-photo-link {
+  display: block;
+  /* 给死宽度，图片没加载完也先占好位，避免加载后跳一下 */
+  width: 100%;
+  max-width: 420px;
+  margin-top: 14px;
+  border-radius: 6px;
+}
+
+.trail-photo {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.trail-photo-link:hover .trail-photo { transform: scale(1.012); }
+
+/* ---------- 7. 随笔：目录列表 ---------- */
+.essay-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.essay-item {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr) 16px;
+  align-items: baseline;
+  gap: 20px;
+  padding: 18px 14px;
+  border-bottom: 1px solid var(--theme-line);
+  transition: background var(--ease);
+}
+
+.essay-item:hover { background: var(--theme-soft); }
+
+.essay-date {
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.essay-text {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.essay-text strong {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  line-height: 1.45;
+}
+
+.essay-excerpt {
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.essay-item > svg {
+  width: 15px;
+  height: 15px;
+  align-self: center;
+  color: var(--muted);
+}
+
+.essay-item:hover > svg { color: var(--ink); }
+
+@media (max-width: 620px) {
+  .essay-item {
+    grid-template-columns: minmax(0, 1fr) 16px;
+    gap: 6px 12px;
+    padding: 15px 10px;
+  }
+  .essay-date { grid-column: 1 / -1; }
+  .essay-text { grid-column: 1; }
+  .essay-item > svg { grid-column: 2; grid-row: 2; }
+}
+
+/* ---------- 8. 随笔：单篇阅读 ---------- */
+.essay-head {
+  max-width: 40rem;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.essay-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.essay-back svg { width: 14px; height: 14px; }
+.essay-back:hover { color: var(--ink); }
+
+.essay-title {
+  margin: 16px 0 0;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3.4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -1.2px;
+  line-height: 1.2;
+}
+
+.essay-body {
+  max-width: 36em;
+  margin-top: 34px;
+  font-size: 17px;
+  line-height: 1.95;
+}
+
+.essay-body > * { margin: 0; }
+.essay-body > * + * { margin-top: 1.15em; }
+.essay-body > h2 + * { margin-top: 0.55em; }
+
+.essay-body > h2 {
+  margin-top: 1.7em;
+  font-size: 19px;
+  font-weight: 650;
+  letter-spacing: -0.3px;
+}
+
+.essay-body > blockquote {
+  margin-top: 1.4em;
+  padding: 2px 0 2px 16px;
+  border-left: 2px solid var(--lime);
+  color: var(--muted);
+}
+
+.essay-figure {
+  max-width: 36em;
+  margin: 32px 0 0;
+}
+
+.essay-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+/* 宽屏：正文在左、配图在右（图跟着往下走）。
+   窄屏不加 .has-figure 之外的东西 —— 图和正文竖排，跟以前一样。 */
+@media (min-width: 901px) {
+  .essay.has-figure {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.72fr);
+    column-gap: clamp(32px, 4vw, 56px);
+    align-items: start;
+    max-width: 68rem;
+  }
+
+  .essay.has-figure .essay-head { grid-column: 1 / -1; grid-row: 1; }
+  .essay.has-figure .essay-body { grid-column: 1; grid-row: 2; }
+
+  .essay.has-figure .essay-figure {
+    grid-column: 2;
+    grid-row: 2;
+    position: sticky;
+    top: 24px;
+    max-width: none;
+    margin: 34px 0 0;
+  }
+
+  .essay.has-figure .essay-nav { grid-column: 1 / -1; grid-row: 3; }
+}
+
+.essay-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 40rem;
+  margin-top: 48px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.essay-nav[hidden] { display: none; }
+
+.essay-nav-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+/* 只有一边有邻居时也各就各位：更新的在左，更早的在右 */
+.essay-nav-item.prev { grid-column: 1; }
+.essay-nav-item.next { grid-column: 2; }
+
+.essay-nav-item.next {
+  align-items: flex-end;
+  text-align: right;
+}
+
+/* 箭头跟小字标签同一行 */
+.essay-nav-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.essay-nav-item svg {
+  width: 14px;
+  height: 14px;
+  color: var(--muted);
+}
+
+.essay-nav-label {
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  color: var(--muted);
+}
+
+.essay-nav-item strong {
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.5;
+}
+
+.essay-nav-item:hover strong { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ---------- 9. 相册：瀑布流照片墙 ----------
+   列数 / 间距 / 信息条高度 / 圆角都由 album-page.js 算好后
+   写成 --album-* 变量，这里只做渲染。 */
+.album-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--album-cols, 4), minmax(0, 1fr));
+  column-gap: var(--album-gap, 18px);
+  row-gap: 0;
+  grid-auto-rows: 4px; /* 高度单位，卡片的行跨度按它算 */
+}
+
+/* 卡片位置（grid-column / grid-row）由 JS 写在内联样式上 */
+.album-tile {
+  display: flex;
+  margin: 0;
+  min-width: 0;
+}
+
+/* .album-tile 设了 display:flex，会压过 [hidden] 自带的 display:none —— 必须补这一条，
+   否则「筛掉的照片」只是逻辑上隐藏，画面上还留在墙里 */
+.album-tile[hidden] { display: none; }
+
+.album-link {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--album-radius, 13px);
+  background: var(--card);
+  transition: border-color var(--ease);
+}
+
+.album-link:hover { border-color: var(--theme-number); }
+
+/* 图片区：吃掉信息条以外的高度 */
+.album-shot {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  background: var(--theme-image-bg);
+}
+
+.album-shot > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+
+.album-link:hover .album-shot > img { transform: scale(1.025); }
+
+/* 左下照片编号 */
+.album-no {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #25271ccc;
+  color: #fbfbf5;
+  font-family: ui-monospace, "Consolas", monospace;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.5px;
+}
+
+/* 右上「放大」，默认透明，悬停或键盘聚焦才出现 */
+.album-zoom {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  place-items: center;
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  background: var(--theme-surface);
+  color: var(--ink);
+  opacity: 0;
+  transition: opacity var(--ease);
+}
+
+.album-zoom svg { width: 16px; height: 16px; }
+
+.album-link:hover .album-zoom,
+.album-link:focus-visible .album-zoom { opacity: 1; }
+
+/* 底部信息条 */
+.album-info {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  height: var(--album-info, 68px);
+  padding: 0 14px;
+  border-top: 1px solid var(--theme-line);
+}
+
+.album-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.album-text strong {
+  overflow: hidden;
+  font-size: 14px;
+  font-weight: 550;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.album-text small {
+  overflow: hidden;
+  font-size: 10px;
+  letter-spacing: 0.3px;
+  color: var(--muted);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.album-arrow {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--theme-soft);
+}
+
+.album-arrow svg { width: 13px; height: 13px; }
+
+/* 分类标签页：胶囊，选中的填深色 */
+.album-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 26px 0 30px;
+}
+
+.album-filter[hidden] { display: none; }
+
+.album-tab {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 7px 15px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background var(--ease), border-color var(--ease), color var(--ease);
+}
+
+.album-tab b {
+  font-size: 11px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.album-tab:hover { border-color: var(--theme-number); }
+
+.album-tab[aria-pressed="true"] {
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--theme-on-button);
+}
+
+.album-tab[aria-pressed="true"] b { color: var(--theme-on-button); opacity: 0.7; }
+
+.album-tab:focus-visible {
+  outline: 3px solid var(--theme-focus);
+  outline-offset: 2px;
+}
+
+/* 没照片时的占位：虚线框 + 一句引导，不留空白框架 */
+.album-empty {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  padding: 24px;
+  border: 1px dashed var(--line);
+  border-radius: 13px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+  text-align: center;
+}
+
+.album-empty[hidden] { display: none; }
+
+/* ---------- 10. 项目：时间线 ----------
+   ⚠️ .project-card / .project-cover 这两个名字首页的项目卡也在用 ——
+   layout.css 给首页那张卡写了 height、components.css 给它的封面写了 height:100%。
+   所以这一节的规则全部套在 .project-list 底下，多一层把它盖过去。
+   改这一节时别把 .project-list 前缀丢掉，也别删掉 height:auto。
+
+   版式（2026-10-09 由两列网格改成时间线）：
+   一行 = 日期列（104px）+ 轴列（28px）+ 卡片列；
+   轴上实心点 + 往下连的竖线，最后一行不画线；时间线铺满内容区（外壳有 --shell-max 兜着）。
+
+   卡片里「文字在左、封面在右」：封面撑满右半边并用 object-fit: cover 填充；
+   封面列封顶 460px，卡片再宽也不会被拉成一条长横带。
+   序号在文字列顶部（窄屏多一枚日期胶囊），箭头绝对定位压在卡片右上角（浮在封面之上）。
+
+   ≤900px：日期列收掉、轴挪到最左，卡片回到「封面在上、文字在下」，封面 2.2:1。 */
+.project-list {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 34px;
+  /* 铺满内容区：页头本来就是整行宽的，这里再固定宽度右边会空一大块 */
+  max-width: none;
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.project-list[hidden] { display: none; }
+
+.project-list .project-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 104px 28px minmax(0, 1fr);
+  align-items: start;
+  min-width: 0;
+}
+
+/* 轴上的日期（右对齐，留出与节点之间的距离） */
+.project-list .project-when {
+  padding-top: 26px;
+  padding-right: 16px;
+  text-align: right;
+  font-family: ui-monospace, "Consolas", monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.4px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* 节点：实心点 + 一圈纸色留白（把下面的连线盖住） */
+.project-list .project-item::before {
+  content: "";
+  position: absolute;
+  left: 112px;
+  top: 26px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--theme-focus);
+  box-shadow: 0 0 0 5px var(--paper);
+  z-index: 1;
+}
+
+/* 连接线：从这一行的节点一直连到下一行的节点 */
+.project-list .project-item::after {
+  content: "";
+  position: absolute;
+  left: 117px;
+  top: 36px;
+  bottom: -60px;
+  width: 1px;
+  background: var(--line);
+}
+
+.project-list .project-item:last-child::after { display: none; }
+
+/* 卡片：左文字 + 右封面 */
+.project-list .project-card {
+  position: relative;
+  grid-column: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 460px);
+  grid-template-rows: auto 1fr;
+  column-gap: clamp(22px, 2.6vw, 44px);
+  row-gap: 14px;
+  min-width: 0;
+  height: auto;
+  padding: 24px 26px 22px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--card);
+  transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+}
+
+.project-list .project-card:hover {
+  border-color: var(--theme-focus);
+  box-shadow: 0 20px 44px -34px rgba(32, 34, 30, 0.6);
+  transform: translateY(-2px);
+}
+
+/* 顶部一行：序号（+ 窄屏的日期胶囊） */
+.project-list .project-top {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 24px;
+  /* 给右上角的箭头让位 */
+  padding-right: 44px;
+}
+
+.project-list .project-no {
+  font-family: ui-monospace, "Consolas", monospace;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* 日期胶囊：只在窄屏出现（桌面端日期在左侧轴上） */
+.project-list .project-date {
+  display: none;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: var(--theme-soft);
+  font-family: ui-monospace, "Consolas", monospace;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* 箭头：绝对定位压在卡片右上角，浮在封面之上 */
+.project-list .project-arrow {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 254, 250, 0.9);
+  box-shadow: 0 0 0 1px var(--line);
+  color: var(--muted);
+  transition: background var(--ease), color var(--ease), box-shadow var(--ease);
+}
+
+.project-list .project-card:hover .project-arrow {
+  background: var(--theme-focus);
+  box-shadow: 0 0 0 1px var(--theme-focus);
+  color: var(--paper);
+}
+
+.project-list .project-arrow svg { width: 19px; height: 19px; }
+
+/* 封面：撑满卡片右半边，高度由卡片决定 */
+.project-list .project-cover {
+  position: relative;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  display: grid;
+  width: 100%;
+  height: 100%;
+  min-height: 190px;
+  overflow: hidden;
+  border-radius: 11px;
+  background: var(--theme-image-bg);
+  box-shadow: inset 0 0 0 1px rgba(32, 34, 30, 0.06);
+}
+
+/* 封面图绝对定位：不参与父级高度计算，图片按框填充并居中裁切 */
+.project-list .project-cover > img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 没封面时的占位块：淡序号水印 + 居中标题 + 右上角 ✳ */
+.project-list .project-fallback {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 22px;
+  background: var(--theme-soft);
+}
+
+.project-list .project-fallback-no {
+  position: absolute;
+  left: 18px;
+  bottom: 6px;
+  font-family: var(--font-display);
+  font-size: clamp(56px, 7vw, 92px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -4px;
+  color: var(--theme-number);
+  user-select: none;
+}
+
+.project-list .project-fallback strong {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(20px, 2.2vw, 30px);
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.project-list .project-fallback i {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-style: normal;
+  font-size: 16px;
+  color: var(--theme-focus);
+}
+
+.project-list .project-body {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.project-list .project-name {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 2vw, 30px);
+  font-weight: 600;
+  line-height: 1.16;
+  letter-spacing: -0.6px;
+}
+
+.project-list .project-desc {
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--muted);
+  /* 行宽封顶：卡片铺满宽屏后，一行别拉得太长 */
+  max-width: 60ch;
+}
+
+/* 底部：日期文字 + 状态胶囊 */
+.project-list .project-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 12px;
+}
+
+.project-list .project-meta-when {
+  font-size: 11.5px;
+  letter-spacing: 0.4px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.project-list .project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 9px 3px 8px;
+  border-radius: 999px;
+  background: var(--theme-soft);
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  color: var(--muted);
+}
+
+.project-list .project-status::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--theme-focus);
+}
+
+/* 中等宽度：封面列收一点，别把文字挤太窄 */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .project-list .project-card { grid-template-columns: minmax(0, 1fr) minmax(200px, 38%); }
+}
+
+/* 窄屏：日期列收掉、轴挪到最左边；卡片回到「封面在上、文字在下」，封面仍是 2.2:1 */
+@media (max-width: 900px) {
+  .project-list { gap: 26px; }
+
+  .project-list .project-item { grid-template-columns: 30px minmax(0, 1fr); }
+
+  .project-list .project-when { display: none; }
+
+  .project-list .project-item::before { left: 10px; top: 33px; }
+  .project-list .project-item::after { left: 15px; top: 43px; bottom: -59px; }
+
+  .project-list .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 22px;
+  }
+
+  .project-list .project-cover {
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 2.2 / 1;
+  }
+
+  .project-list .project-date { display: inline-block; }
+
+  /* 日期已经在卡片顶部那枚胶囊里了，底部不再重复 */
+  .project-list .project-meta-when { display: none; }
+
+  .project-list .project-desc { max-width: none; }
+}
+
+/* ---------- 11. 友链：自适应网格 ----------
+   列数交给 auto-fill 自己算，不写断点：
+   宽屏自然铺 4 / 5 列，窄屏一路落到单列。 */
+.friend-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
+  gap: 20px;
+  margin: 48px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.friend-list[hidden] { display: none; }
+
+.friend-item {
+  display: flex;
+  min-width: 0;
+}
+
+.friend-card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--card);
+  transition: border-color var(--ease);
+}
+
+.friend-card:hover { border-color: var(--theme-focus); }
+
+.friend-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+/* 头像位：有图放图，没图放名称首字 */
+.friend-avatar {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: 6px;
+  border-radius: 16px;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.friend-avatar img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 三种柔和底色，按 3n+1 / 3n+2 / 3n 轮换 */
+.friend-avatar.tone-1 { background: #eef2e3; }
+.friend-avatar.tone-2 { background: #e9eef0; }
+.friend-avatar.tone-3 { background: #f3eae2; }
+
+.friend-arrow {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: var(--muted);
+  transition: background var(--ease), color var(--ease);
+}
+
+.friend-card:hover .friend-arrow {
+  background: var(--theme-soft);
+  color: var(--ink);
+}
+
+.friend-arrow svg { width: 20px; height: 20px; }
+
+.friend-name {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+
+.friend-intro {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* 底部署名行：分隔线上面 15px */
+.friend-sign {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  letter-spacing: 0.3px;
+  color: var(--muted);
+}
+
+.friend-sign svg {
+  flex-shrink: 0;
+  width: 13px;
+  height: 13px;
+}
+
+/* 空状态：虚线边框 + 62px 圆图标 + 标题 + 一句引导 */
+.friend-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 310px;
+  padding: 32px;
+  border: 1px dashed var(--line);
+  border-radius: 13px;
+  text-align: center;
+}
+
+.friend-empty[hidden] { display: none; }
+
+.friend-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 62px;
+  height: 62px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: var(--theme-soft);
+  color: var(--muted);
+}
+
+.friend-empty-icon svg { width: 24px; height: 24px; }
+
+.friend-empty b {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: var(--ink);
+}
+
+.friend-empty p {
+  max-width: 34em;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* ============================================================
+   12. 收集：三张卡，各自独立滚动
+   三张卡（链接 / 书影音 / 足迹）并排；每张卡固定高度，卡内自己滚 ——
+   卡头（图标 + 标题 + 计数）留在原地，只有下面的内容滚。
+   好处是长的足迹卡不会把页面拉长，三张卡永远一样高。
+   列数 / 卡高 / 滚动条都在这一节；把 collections/index.html 里的
+   .collect-deck 这层去掉、本节删掉，就回到一条通排的长列表。
+   ============================================================ */
+.collect-deck {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  margin-top: 26px;
+}
+
+/* 断点只用 min-width 往上加：分栏宽度算出来可能是 999.33px 这种小数，
+   写 max-width 的上界会和下一档同时落空，中间裂出一条缝。 */
+@media (min-width: 700px) {
+  .collect-deck { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .collect-deck .collect-section:last-child { grid-column: 1 / -1; }
+}
+
+@media (min-width: 1080px) {
+  .collect-deck {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.32fr);
+  }
+  .collect-deck .collect-section:last-child { grid-column: auto; }
+}
+
+.collect-deck .collect-section {
+  position: relative;
+  /* 自己成一层，右下角那枚水印才好压在卡底和内容之间 */
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  height: clamp(440px, 64svh, 720px);
+  margin-top: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--card);
+  transition: border-color var(--ease);
+}
+
+.collect-deck .collect-section:hover { border-color: var(--theme-number); }
+
+/* 这条要留着：§3 的 .collect-section[hidden] 和上面的选择器一样重，
+   谁在后面谁赢，少了它「这一分类没数据」的卡会又冒出来 */
+.collect-deck .collect-section[hidden] { display: none; }
+
+/* ---- 卡头：图标 + 标题 + 计数胶囊 ---- */
+.collect-deck .collect-section > header {
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 0;
+  padding: 14px 15px 12px;
+  border-bottom: 1px solid var(--line);
+}
+
+.collect-deck .collect-section > header h2 {
+  flex: 1;
+  min-width: 0;
+  font-size: 15px;
+  letter-spacing: -0.2px;
+}
+
+.collect-icon {
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  background: var(--lime);
+  color: var(--ink);
+}
+
+.collect-icon svg { width: 16px; height: 16px; }
+
+.collect-deck .collect-section > header .count {
+  flex-shrink: 0;
+  padding: 4px 9px;
+  border-radius: 999px;
+  background: var(--theme-soft);
+  font-size: 10.5px;
+  letter-spacing: 0.4px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+/* ---- 卡身：这一段自己滚（滚到头不会把整页带着一起滑） ---- */
+.collect-deck .collect-section > div {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 4px 14px 16px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--theme-number) transparent;
+}
+
+.collect-deck .collect-section > div::-webkit-scrollbar { width: 6px; }
+.collect-deck .collect-section > div::-webkit-scrollbar-track { background: transparent; }
+
+.collect-deck .collect-section > div::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--theme-number);
+}
+
+/* ---- 卡右下角那枚很大的浅色字形：内容少的卡不至于空掉一半 ---- */
+.collect-glyph {
+  position: absolute;
+  right: -16px;
+  bottom: -20px;
+  z-index: -1;
+  width: 136px;
+  height: 136px;
+  color: var(--ink);
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.collect-glyph svg {
+  width: 100%;
+  height: 100%;
+  stroke-width: 1.1;
+}
+
+/* ---- 卡内微调 ---- */
+.collect-deck .link-item {
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 10px;
+}
+
+.collect-deck .link-list > li:last-child .link-item { border-bottom: 0; }
+
+/* 卡里窄，书 / 影 / 音三组竖着排 */
+.collect-deck .media-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 18px;
+}
+
+.collect-deck .media-list > li:last-child .media-item { border-bottom: 0; }
+
+.collect-deck .trail::before { background: var(--line); }
+
+.collect-deck .trail-item { padding-bottom: 26px; }
+
+/* 圆点外面那圈要和卡片底色一致，压在竖线上才干净 */
+.collect-deck .trail-item::before { box-shadow: 0 0 0 4px var(--card); }
+
+.collect-deck .trail-head h3 { font-size: 16px; }
+.collect-deck .trail-note { font-size: 13px; }
+
+.collect-deck .trail-photo-link,
+.collect-deck .trail-photo {
+  /* 单列时卡很宽，照片给个上限，不至于撑成整屏 */
+  max-width: 520px;
+  border-radius: 10px;
+}

@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="fresh">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f6f2" />
+  <meta name="description" content="夜坐所安 — 一个收藏照片、随笔和音乐的个人空间。" />
+  <title>首页 · 夜坐所安的小屋</title>
+
+  <link rel="stylesheet" href="assets/css/tokens.css" />
+  <link rel="stylesheet" href="assets/css/layout.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">跳到页面内容</a>
+
+<div class="site-shell">
+
+  <!-- ================= 站头 ================= -->
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="夜坐所安的小屋 首页">
+      <span>夜坐所安的小屋</span>
+    </a>
+
+    <nav aria-label="主导航">
+      <a href="index.html" class="active" aria-current="page">首页</a>
+      <a href="projects/index.html">项目</a>
+      <a href="essays/index.html">随笔</a>
+      <a href="photos/index.html">相册</a>
+      <a href="collections/index.html">收集</a>
+      <a href="friends/index.html">友链</a>
+    </nav>
+
+    <div class="header-contact">
+      <span>
+        <i></i>
+        <span class="header-location-name" title="广州, CN">广州, CN</span>
+      </span>
+      <a class="button dark" href="mailto:huang_xiang_hua@163.com">
+        聊聊
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17 17 7M9 7h8v8" />
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ================= 主区：九宫格 ================= -->
+  <main id="main" tabindex="-1" class="bento-grid" aria-label="首页内容">
+
+    <!-- 第一行 1.8fr / 1.05fr / 1fr -->
+    <div class="bento-row top-row">
+
+      <!-- ① Hero -->
+      <section class="card hero-card has-avatar">
+        <div class="hero-top">
+          <span class="eyebrow">A Personal Space</span>
+        </div>
+
+        <h1>
+          <span class="headline-primary">夜坐所安</span>
+        </h1>
+
+        <div class="hero-copy">
+          <p>在广州，收着一些照片、随笔和喜欢的音乐。</p>
+        </div>
+
+        <div class="hero-actions">
+          <a class="button dark hero-button" href="https://github.com/h-xh-git"
+             target="_blank" rel="noopener" aria-label="认识我的 GitHub：h-xh-git">
+            认识我的GitHub
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7M9 7h8v8" />
+            </svg>
+          </a>
+
+          <a class="button ghost hero-button hero-mail" href="mailto:huang_xiang_hua@163.com" title="发邮件给我">
+            huang_xiang_hua@163.com
+          </a>
+        </div>
+
+        <div class="hero-celestial has-avatar">
+          <button class="hero-avatar" type="button" data-pending="个人介绍" aria-label="查看个人介绍">
+            <img src="assets/img/profile/avatar.jpg" alt="夜坐所安的小屋 的头像" width="480" height="416" />
+          </button>
+          <div class="hero-orbit" aria-hidden="true"><span></span><i></i></div>
+        </div>
+
+        <span class="hero-side-note" aria-hidden="true">A Brighter Daily Life</span>
+        <span class="hero-bottom-note">A PERSONAL SPACE / 2026</span>
+      </section>
+
+      <!-- ② 照片 · 整张卡和右下角箭头都进「相册」 -->
+      <section class="card photo-card">
+        <a class="photo-open" href="photos/index.html" aria-label="打开相册">
+          <img src="assets/img/home/photo-card.jpg" alt="深色水面上一朵盛开的蓝睡莲"
+               width="1600" height="1062" />
+        </a>
+        <span class="photo-label">日常切片</span>
+        <div class="photo-caption">
+          <div>
+            <h2>睡莲</h2>
+            <span>广州</span>
+          </div>
+          <a href="photos/index.html" aria-label="浏览这张照片">
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7M9 7h8v8" />
+            </svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- ③ 时钟（不含天气） -->
+      <section class="card clock-card" aria-label="广州当地时间">
+        <div class="clock-top">
+          <span class="eyebrow">Local Time / <span class="clock-city">广州</span></span>
+        </div>
+        <div class="clock-digits">
+          <i class="clock-hour">--</i><span>:</span><i class="clock-minute">--</i>
+        </div>
+        <div class="clock-date">
+          <span class="clock-day">····</span><span>·</span><span class="clock-weekday">—</span>
+        </div>
+        <div class="clock-bottom">
+          <i></i>
+          <span class="clock-zone">UTC+8</span>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- 第二行 1.75fr / 1.1fr / 1fr -->
+    <div class="bento-row middle-row">
+
+      <!-- ④ 项目卡 · 内容取 assets/data/projects.js 里那条真实项目（双核示波器） -->
+      <section class="card project-card">
+        <div class="section-top">
+          <span class="eyebrow">01 / Selected Project</span>
+          <div>
+            <a class="text-button" href="projects/index.html">查看项目</a>
+          </div>
+        </div>
+        <div class="project-title">
+          <h2>双核示波器</h2>
+          <span>做完了</span>
+        </div>
+        <p class="project-summary">STM32F407 负责采集与触发，ESP32-S3 负责网页示波器，两核之间一根 460800 bps UART 走自制 CRC-8 帧协议。</p>
+        <div class="project-preview">
+          <img class="project-cover" src="assets/img/projects/oscilloscope.png"
+               alt="双核示波器的 TFT 界面：时基 3.00ms、运行中、双通道正弦波形" loading="lazy" />
+        </div>
+      </section>
+
+      <!-- ⑤ 随笔卡 · 内容由 assets/data/essays.js 驱动（这里是最近三篇），
+           全部内容留给「随笔」栏目页；无配图的那条自动变成纯文字行 -->
+      <section class="card article-card" data-essay-card>
+        <div class="section-top">
+          <h2>最近写下的</h2>
+          <div>
+            <a class="text-button" href="essays/index.html">
+              全部
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 三行由 assets/js/essays-page.js 填 -->
+        <div class="home-articles"></div>
+      </section>
+
+      <!-- ⑥ 日历卡 · 真实逻辑，广州时区，见 assets/js/calendar.js -->
+      <section class="card calendar-card">
+        <div class="calendar-top">
+          <div>
+            <h2 class="calendar-month">十月</h2>
+            <span class="eyebrow calendar-month-en">October</span>
+          </div>
+          <div class="month-controls">
+            <button class="month-prev" type="button" aria-label="上个月">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <span class="calendar-year">2026</span>
+            <button class="month-next" type="button" aria-label="下个月">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="calendar-grid"></div>
+        <button class="calendar-footer" type="button"><i></i>今天也适合开始。</button>
+      </section>
+
+    </div>
+
+    <!-- 第三行 1.5fr / 1.05fr / 1.25fr -->
+    <div class="bento-row bottom-row">
+
+      <!-- ⑦ 站点信息卡 · 「在站天数」与「音乐首数」由 assets/js/site.js 现算，
+           其余数字改这里；口径见 README「第三行三张卡」 -->
+      <section class="card siteinfo-card">
+        <div class="section-top">
+          <span class="eyebrow">Site Info</span>
+          <span class="site-days">在站 —</span>
+        </div>
+
+        <div class="site-stats">
+          <div>
+            <b data-site-music>—</b>
+            <span>首音乐</span>
+          </div>
+          <div>
+            <b data-site-photos>—</b>
+            <span>张照片</span>
+          </div>
+          <div>
+            <b data-site-essays>—</b>
+            <span>篇随笔</span>
+          </div>
+        </div>
+
+        <div class="site-info-lines">
+          <!-- 弹窗本体在本页末尾，逻辑在 assets/js/review.js；
+               「建站 / 最近更新」在 .site-meta 里，靠右站成一列 -->
+          <button class="review-button" type="button" data-review-open
+                  aria-haspopup="dialog" aria-controls="review-modal">
+            访问与评价
+            <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 17 17 7M9 7h8v8" />
+            </svg>
+          </button>
+
+          <div class="site-meta">
+            <div><span>建站</span><b>2026.10.08</b></div>
+            <div><span>最近更新</span><b>2026.10.08</b></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ⑧ 最近收集卡 · 内容由 assets/data/collections.js 驱动（链接 / 书 / 影 / 音 / 足迹），
+           卡上只出最近两条 + 分类计数，全部内容留给「收集」栏目页 -->
+      <section class="card collection-card">
+        <div class="section-top">
+          <h2>最近收集</h2>
+          <div>
+            <a class="text-button collection-all" href="collections/index.html">
+              全部
+              <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"/><path d="m12 5 7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- 下面两块由 assets/js/collection-card.js 填 -->
+        <div class="collection-list"></div>
+        <div class="collection-kinds"></div>
+      </section>
+
+      <!-- ⑨ 音乐播放器卡 · 真能播：歌单在 assets/music/playlist.js，逻辑在 assets/js/player.js -->
+      <section class="card music-card">
+        <div class="section-top">
+          <span class="eyebrow">Now Playing</span>
+          <button class="text-button music-list-toggle" type="button"
+                  aria-expanded="false" aria-controls="music-list">
+            歌单
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+        </div>
+
+        <div class="music-body">
+          <div class="music-cover" aria-hidden="true">
+            <i></i><i></i><i></i><i></i>
+          </div>
+          <div class="music-meta">
+            <strong class="music-title">—</strong>
+            <span class="music-index">— / —</span>
+          </div>
+        </div>
+
+        <div class="music-progress-row">
+          <span class="music-elapsed">0:00</span>
+          <input class="music-progress" type="range" min="0" max="1" step="1" value="0"
+                 aria-label="播放进度" />
+          <span class="music-duration">0:00</span>
+        </div>
+
+        <div class="music-controls">
+          <button class="music-prev" type="button" aria-label="上一首">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 20 9 12l10-8z"/><path d="M5 19V5"/></svg>
+          </button>
+          <button class="music-play" type="button" aria-label="播放">
+            <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+            <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 4.5h4v15H7zM13 4.5h4v15h-4z"/></svg>
+          </button>
+          <button class="music-next" type="button" aria-label="下一首">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 4 10 8-10 8z"/><path d="M19 5v14"/></svg>
+          </button>
+
+          <div class="music-volume-wrap">
+            <button class="music-mute" type="button" aria-label="静音">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg>
+            </button>
+            <input class="music-volume" type="range" min="0" max="100" step="1" value="70"
+                   aria-label="音量" />
+          </div>
+        </div>
+
+        <div class="music-list" id="music-list" hidden>
+          <header>
+            <h2>歌单</h2>
+            <button class="text-button music-list-close" type="button">收起</button>
+          </header>
+          <ul class="music-list-items"></ul>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- ================= 页脚 ================= -->
+  <footer class="site-footer">
+    <span>© 2026 夜坐所安的小屋</span>
+    <div>
+      <a class="footer-contact" href="mailto:huang_xiang_hua@163.com" title="发邮件给我">huang_xiang_hua@163.com</a>
+      <a class="footer-contact" href="https://github.com/h-xh-git" target="_blank" rel="noopener" aria-label="GitHub：h-xh-git" title="github.com/h-xh-git">GitHub · h-xh-git</a>
+      <button type="button" data-pending="素材说明">素材说明</button>
+      <span class="footer-motto">把好奇心变成作品。</span>
+      <span class="footer-star">✳</span>
+    </div>
+  </footer>
+
+</div>
+
+<!-- ================= 访问与评价弹窗 =================
+     里面装的是 giscus（评论存到 GitHub Discussions）：
+     第一次点开那颗按钮时才把脚本装进来，没点过的访客不加载它。
+     要填的两个 ID 在 assets/js/review.js 顶部。 -->
+<div class="review-modal" id="review-modal" data-review-modal hidden>
+  <div class="review-backdrop" data-review-close></div>
+  <div class="review-panel" role="dialog" aria-modal="true" aria-labelledby="review-title">
+    <div class="review-head">
+      <div>
+        <h2 id="review-title">说两句</h2>
+        <p class="review-sub">用 GitHub 账号留言，评论会存进我的 GitHub Discussions。</p>
+      </div>
+      <button class="review-close" type="button" aria-label="关闭" data-review-close>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+    <div class="review-body" data-review-body>
+      <div data-review-comments></div>
+      <p class="review-note" data-review-note hidden></p>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/fit.js"></script>
+<script src="assets/js/clock.js"></script>
+<script src="assets/js/calendar.js"></script>
+<!-- 数据文件必须排在读它们的脚本之前：
+     playlist.js    → site.js（音乐首数）/ player.js（歌单）
+     essays.js      → site.js（随笔篇数）/ essays-page.js（首页卡三行）
+     album.js       → site.js（照片张数） -->
+<script src="assets/music/playlist.js"></script>
+<script src="assets/data/essays.js"></script>
+<script src="assets/data/album.js"></script>
+<script src="assets/js/site.js"></script>
+<script src="assets/js/player.js"></script>
+<script src="assets/js/essays-page.js"></script>
+<!-- collections.js 是数据，必须排在 collection-card.js 之前 -->
+<script src="assets/data/collections.js"></script>
+<script src="assets/js/collection-card.js"></script>
+<script src="assets/js/review.js"></script>
+<script src="assets/js/nav.js"></script>
+</body>
+</html>
