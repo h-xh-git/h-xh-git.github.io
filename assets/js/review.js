@@ -8,11 +8,14 @@
    面板里的 giscus 脚本是「第一次点开按钮」时才注入的：
    没点过的访客完全不碰这个第三方脚本。
 
-   ── 接线三步（做完就能用）────────────────────────────────
-   1) 仓库公开，Settings → Features 勾上 Discussions；
-   2) 给这个仓库装上 giscus App：https://github.com/apps/giscus
-   3) 打开 https://giscus.app/zh-CN ，填仓库名、选一个分类
-      （建议 Announcements），它会给出下面四个值 —— 复制粘贴到这里。
+   ── 接线状态：已完成（2026-10-09）────────────────────────
+   仓库的 Discussions 已开启、giscus App 已装到 h-xh-git/h-xh-git.github.io，
+   四个值就是下面 CONFIG 里的（换仓库或换分类时要跟着改，
+   新值在 https://giscus.app/zh-CN 填仓库名后生成）：
+     repo         h-xh-git/h-xh-git.github.io
+     repoId       R_kgDOUrFj_w
+     category     Announcements
+     categoryId   DIC_kwDOUrFj_84DHX_L
    注意：giscus 要站点在 http(s) 上才连得上 GitHub，
    所以本地 file:// 双击预览时弹窗里只会显示一句说明，属正常。
    ============================================================ */
@@ -20,11 +23,11 @@
   /* ↓↓↓ 只有这四个值需要你填 ↓↓↓ */
   var CONFIG = {
     repo: "h-xh-git/h-xh-git.github.io", /* owner/repo，就是本站仓库 */
-    repoId: "", /* R_ 开头，giscus.app 给 */
+    repoId: "R_kgDOUrFj_w", /* R_ 开头，giscus.app 给 */
     category: "Announcements", /* Discussion 分类名 */
-    categoryId: "" /* DIC_ 开头，giscus.app 给 */
+    categoryId: "DIC_kwDOUrFj_84DHX_L" /* DIC_ 开头，giscus.app 给 */
   };
-  /* ↑↑↑ 填完这两个空字符串就生效 ↑↑↑ */
+  /* ↑↑↑ 四个值都齐了（2026-10-09 接线完成）↑↑↑ */
 
   var MAIL = "huang_xiang_hua@163.com";
   var GITHUB = "https://github.com/h-xh-git";
@@ -82,8 +85,8 @@
       "data-strict": "0",
       "data-reactions-enabled": "1",
       "data-emit-metadata": "0",
-      "data-input-position": "top",
-      "data-theme": "light",
+      "data-input-position": "bottom",
+      "data-theme": "preferred_color_scheme",
       "data-lang": "zh-CN",
       "data-loading": "lazy"
     };

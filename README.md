@@ -390,17 +390,19 @@ git push
 
 点按钮弹出「说两句」弹窗，里面是 **giscus** —— 评论存在**你自己仓库的 GitHub Discussions** 里，访客用**自己的** GitHub 账号登录留言。**站点里不放任何 token**（静态站里塞 token 等于把写权限公开，别那么干）。
 
-**要接线，三步（做完才生效）：**
+**已经接线完成**（2026-10-09）：仓库的 Discussions 已开启、giscus App 已装到本仓库，四个值都写进 `assets/js/review.js` 顶部的 `CONFIG` 了：
 
-1. 仓库公开，Settings → Features 勾上 **Discussions**；
-2. 给这个仓库装上 giscus App：<https://github.com/apps/giscus>；
-3. 打开 <https://giscus.app/zh-CN>，填仓库名、选一个分类（建议 **Announcements**），它会给出一段代码，里面四个值：
-   - `data-repo` → 填进 `assets/js/review.js` 顶部 `CONFIG.repo`（**现在写的是 `h-xh-git/h-xh-git.github.io`，就是本站仓库**）
-   - `data-repo-id`（`R_` 开头）→ `CONFIG.repoId`
-   - `data-category` → `CONFIG.category`
-   - `data-category-id`（`DIC_` 开头）→ `CONFIG.categoryId`
+| giscus 字段 | 值 |
+| --- | --- |
+| `data-repo` | `h-xh-git/h-xh-git.github.io` |
+| `data-repo-id` | `R_kgDOUrFj_w` |
+| `data-category` | `Announcements` |
+| `data-category-id` | `DIC_kwDOUrFj_84DHX_L` |
 
-`review.js` 里这两个 ID 还空着的时候，弹窗会显示「评论区还在接线中」+ 邮箱和 GitHub 的兜底入口，不算坏。
+- 映射是 `data-mapping="pathname"`：**每篇文章各自一个讨论帖**，标题里带页面路径，所以留言不会串到别的页面上。
+- 换仓库、换分类时要把这四个值一起改（新值在 <https://giscus.app/zh-CN> 填仓库名后生成）。
+- `review.js` 里四个值只要缺一个，弹窗就退回「评论区还在接线中」+ 邮箱和 GitHub 的兜底入口，不会白屏。
+- 第一次有人留言时，giscus 才创建对应的 discussion；在那之前 Discussions 里看不到这个帖子，属正常。
 
 **几个刻意的设计：**
 
@@ -468,7 +470,7 @@ git push
 
 - 桌面窗口很矮时（视口高度约 740px 以下），第一行的 Hero 卡和时钟卡内容会被压到溢出。第三行那三张卡早就按容器高度做了降级，第一行还没做。
 - 音乐没上线（见「音乐以后放哪」）：歌单 13 首，本地能听，线上降级成一句提示。
-- 评论弹窗（giscus）还差两个 ID：`assets/js/review.js` 里的 `repoId` / `categoryId` 空着，弹窗显示「评论区还在接线中」。仓库名已改成本站仓库，接下来要在该仓库开 Discussions、装 giscus App，再去 giscus.app 取那两个 ID。
+- 评论弹窗（giscus）**已接线完成**（2026-10-09）：Discussions 已开、App 已装、四个值已写入 `assets/js/review.js`。剩下的只是「第一条留言」—— 第一次有人评论时 giscus 会自己建对应的 discussion。
 - 项目 01 掌上红白机 / 02 智能停车场 没有 `date`（轴上写「日期待补」）也没有封面。
 - 相册只有 3 张占位照片；`D:\相册\花枝入梦来\` 里还有 11 张没导入；「漫漫人物录」还空着（分类标签因此不出现，属预期）。
 - 友链 0 位（`window.FRIENDS = []`），等真朋友。
