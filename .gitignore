@@ -9,3 +9,6 @@ _tmp*
 
 # 音乐：13 首商业歌曲 ≈ 116 MB，先不传（要传就把下面这行删掉）
 assets/music/*.mp3
+
+# 原图留底：页面不读，约 7 MB，只有本地留（要传就把下面这行删掉）
+assets/img/originals/

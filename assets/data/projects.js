@@ -22,11 +22,11 @@
      03 平衡滚球小车 —— 简历「校园经历」里 2026 年电赛那条（简历原文标题见 README）；
      04 双板 MP3 播放器 —— 来自本机工程目录 D:\DeepSeek Demo\Music\STM32-ESP32-MP3-Player
         （有独立 GitHub 仓库，所以填了 link，整张卡可点、右上角出箭头）；
-        封面是那块 320×240 TFT 的界面图（原图留在 assets/img/originals/mp3-ui-mockup.png），
+        封面是那块 320×240 TFT 的界面图（原图本地留底 assets/img/originals/mp3-ui-mockup.png，不进仓库），
         按卡片槽位比例 2.2:1 裁过 —— 只留了歌名、歌手、歌词和进度条那一段。
      05 双核示波器 —— 来自本机工程目录 D:\DeepSeek Demo\DualCore-AudioHub\DualCore-Oscilloscope
         （独立 GitHub 仓库，公开 / GPL-3.0，所以也填了 link）；封面用仓库里的 ui_preview.png
-        （tools/preview_ui.py 离线渲染出来的真实界面，原图留在 assets/img/originals/oscilloscope-ui-preview.png），
+        （tools/preview_ui.py 离线渲染出来的真实界面，原图本地留底 assets/img/originals/oscilloscope-ui-preview.png，不进仓库），
         按卡片槽位比例 2.2:1 裁成 960×436 —— 留了状态栏 + 波形区。
    date 的来源（2026-10-09 补）：
      03 平衡滚球小车 —— 简历「校园经历」原文就写「2026.07 – 2026.08」，所以填了
