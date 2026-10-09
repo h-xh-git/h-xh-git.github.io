@@ -19,7 +19,7 @@
 (function () {
   /* ↓↓↓ 只有这四个值需要你填 ↓↓↓ */
   var CONFIG = {
-    repo: "h-xh-git/yezuo-blog", /* owner/repo，改成你的仓库名 */
+    repo: "h-xh-git/h-xh-git.github.io", /* owner/repo，就是本站仓库 */
     repoId: "", /* R_ 开头，giscus.app 给 */
     category: "Announcements", /* Discussion 分类名 */
     categoryId: "" /* DIC_ 开头，giscus.app 给 */
